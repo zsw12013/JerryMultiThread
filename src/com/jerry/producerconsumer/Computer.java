@@ -14,11 +14,11 @@ public class Computer {
 	public synchronized void put(String name) {
 		if (number >= 10) {
 			try {
+				System.out.println(Thread.currentThread().getName()+ "：存放等待---仓库库存足够");
 				this.wait();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			System.out.println(Thread.currentThread().getName()+ "：存放等待---仓库库存足够");
 			return;
 		}
 		number += 1;
@@ -32,12 +32,11 @@ public class Computer {
 	public synchronized void get(String name) {
 		if (number <= 0) {
 			try {
+				System.out.println(Thread.currentThread().getName()+ ": 取电脑受阻-因为库存余数为0");
 				this.wait();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			System.out.println(Thread.currentThread().getName()
-					+ ": 取电脑受阻-因为库存余数为0");
 			return;
 		}
 		number -= 1;
